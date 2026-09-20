@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Course {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique @db.VarChar(100)
+  description String?  @db.VarChar(255)
+  duration    Int
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
+
+  courseModules CourseModule[]
+
+  @@map("courses")
+}
+
+model Module {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique @db.VarChar(100)
+  description String?  @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
+
+  courseModules CourseModule[]
+
+  @@map("modules")
+}
+
+model CourseModule {
+  courseId String @map("course_id") @db.Uuid
+  moduleId String @map("module_id") @db.Uuid
+
+  course Course @relation(fields: [courseId], references: [id])
+  module Module @relation(fields: [moduleId], references: [id])
+
+  @@id([courseId, moduleId])
+  @@map("couses_modules")
+}
