@@ -23,4 +23,12 @@ model Courses {
   @@map("courses")
 }
 
+model Modules {
+  id          String   @id @default(uuid())
+  name        String   @unique @db.VarChar(100)
+  description String?  @db.VarChar(255)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
 
+  @@map("modules")
+}
