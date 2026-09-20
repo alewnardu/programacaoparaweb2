@@ -1,0 +1,21 @@
+{
+  "name": "progweb2",
+  "version": "1.0.0",
+  "description": "Projeto didático da disciplina de Programação para Web II (TADS - 4º Período - PALMAS)",
+  "scripts": {
+    "dev": "node --watch --env-file .env src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alewnardu/programacaoparaweb2.git"
+  },
+  "keywords": [],
+  "author": "Leonardo Araujo",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alewnardu/programacaoparaweb2/issues"
+  },
+  "homepage": "https://github.com/alewnardu/programacaoparaweb2#readme"
+}
