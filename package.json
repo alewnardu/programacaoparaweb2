@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/alewnardu/programacaoparaweb2/issues"
   },
-  "homepage": "https://github.com/alewnardu/programacaoparaweb2#readme"
+  "homepage": "https://github.com/alewnardu/programacaoparaweb2#readme",
+  "devDependencies": {
+    "prisma": "^7.10.0"
+  }
 }
