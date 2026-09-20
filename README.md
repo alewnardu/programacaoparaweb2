@@ -22,7 +22,8 @@ Nesse caso (CHECK, VIEW, PROCEDURE, FUNCTION, etc.) deverão ser criadas manualm
 #### Criando migração para edição manual
 docker exec -it progweb2_app npx prisma migrate dev --create-only --name add_nome_entidade_constraints
 
-### Executando a migração
+### Executando as migrações
 docker exec -it progweb2_app npx prisma migrate dev
 
+### Resetando as migrações
 docker exec -it progweb2_app npx prisma migrate reset
