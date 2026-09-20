@@ -3,13 +3,18 @@
 
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
+// generator client {
+//   provider = "prisma-client"
+//   output   = "../src/generated/prisma"
+// }
+
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  schemas  = ["progweb2"]
 }
 
 model Course {
@@ -23,6 +28,7 @@ model Course {
   courseModules CourseModule[]
 
   @@map("courses")
+  @@schema("progweb2")
 }
 
 model Module {
@@ -35,6 +41,7 @@ model Module {
   courseModules CourseModule[]
 
   @@map("modules")
+  @@schema("progweb2")
 }
 
 model CourseModule {
@@ -46,4 +53,5 @@ model CourseModule {
 
   @@id([courseId, moduleId])
   @@map("couses_modules")
+  @@schema("progweb2")
 }
