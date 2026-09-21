@@ -12,54 +12,29 @@ datasource db {
   schemas  = ["progweb2"]
 }
 
-model Course {
-  id          String   @id @default(uuid()) @db.Uuid
-  name        String   @unique @db.VarChar(100)
-  description String?  @db.VarChar(255)
-  duration    Int
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
-  fkTeacherId String   @unique @map("fk_teacher_id") @db.Uuid
-
-  teacher       Teacher        @relation(fields: [fkTeacherId], references: [id])
-  courseModules CourseModule[]
-
-  @@map("courses")
-  @@schema("progweb2")
-}
-
-model Module {
-  id          String   @id @default(uuid()) @db.Uuid
-  name        String   @unique @db.VarChar(100)
-  description String?  @db.VarChar(255)
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
-
-  courseModules CourseModule[]
-
-  @@map("modules")
-  @@schema("progweb2")
-}
-
-model CourseModule {
-  courseId String @map("course_id") @db.Uuid
-  moduleId String @map("module_id") @db.Uuid
-
-  course Course @relation(fields: [courseId], references: [id])
-  module Module @relation(fields: [moduleId], references: [id])
-
-  @@id([courseId, moduleId])
-  @@map("couses_modules")
-  @@schema("progweb2")
-}
-
-model Teacher {
-  id        String   @id @default(uuid()) @db.Uuid
-  name      String   @unique @db.VarChar(100)
+model Author {
+  id   String @id @default(uuid()) @db.Uuid
+  name String @unique @db.VarChar(150)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
-  course    Course?
 
-  @@map("teachers")
+  books Book[]
+
+  @@map("authors")
   @@schema("progweb2")
 }
+
+model Book {
+  id String @id @default(uuid()) @db.Uuid
+  name String @db.VarChar(150)
+  authorId String @map("author_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  author Author @relation(fields: [authorId], references: [id])
+
+  @@map("books")
+  @@schema("progweb2")
+}
+
+
