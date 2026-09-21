@@ -13,13 +13,24 @@ const prisma = new PrismaClient({
 async function main() {
     const result = await prisma.course.create({
         data: {
-            name: "Curso de React",
-            description: "Fundamentos de React",
-            duration: 200,
-        },
+            name: "Curso Básico de Prisma.js",
+            duration: 60,
+            description: "Curso de Prisma.js",
+
+            teacher: {
+                connectOrCreate: {
+                    where: {
+                        name: "Leonardo Araujo",
+                    },
+                    create: {
+                        name: "Leonardo Araujo",
+                    }
+                }
+            }
+        }
     });
 
-    console.log("Result:", result);
+    console.log(result);
 }
 
 main()
