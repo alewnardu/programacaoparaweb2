@@ -11,9 +11,17 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
-    const result = await prisma.teacher.create({
+    const result = await prisma.course.create({
         data: {
-            name: "Henryk Andrade Vitorino",
+            name: "Desenvolvimento Web",
+            duration: 60,
+            description: "Curso de Desenvolvimento Web",
+
+            teacher: {
+                create: {
+                    name: "Felipe Vinícius",
+                }
+            }
         }
     });
 
