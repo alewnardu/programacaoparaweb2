@@ -30,6 +30,7 @@ programacaoparaweb2/
 │   └── ...
 │
 ├── .env
+├── .env-example
 ├── .gitignore
 ├── docker-compose.yaml
 ├── Dockerfile
@@ -37,14 +38,15 @@ programacaoparaweb2/
 ├── package-lock.json
 ├── package.json
 ├── prisma.config.ts
-└── README.md
+├── README.md
+└── scripts.ps1
 ```
 
 ---
 
 # ⚙️ Instalação
 
-## 1. Criando o `package.json`
+## 1. Se não existisse, o `package.json` poderia ser criado através de um container temporário:
 
 Como o projeto utiliza Docker para executar o Node.js, o `package.json` pode ser criado através de um container temporário:
 
