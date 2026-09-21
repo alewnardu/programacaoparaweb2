@@ -11,13 +11,10 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
-    const result = await prisma.course.update({
-        where: {
-            id: "bcc7fc59-252b-443a-8e17-4bd8ad0b7db9",
-        },
-        data: {
-            name: "Curso Básico de Java",
-        },
+    const result = await prisma.course.findMany({
+        include: {
+            teacher: true,
+        }
     });
 
     console.log(result);

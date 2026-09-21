@@ -11,11 +11,9 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
-    const result = await prisma.course.create({
+    const result = await prisma.teacher.create({
         data: {
-            name: "Curso de React",
-            description: "Fundamentos de React",
-            duration: 200,
+            name: "Emanuele Fauro",
         },
     });
 
