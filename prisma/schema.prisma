@@ -12,54 +12,39 @@ datasource db {
   schemas  = ["progweb2"]
 }
 
-model Course {
+model Courses {
   id          String   @id @default(uuid()) @db.Uuid
   name        String   @unique @db.VarChar(100)
   description String?  @db.VarChar(255)
   duration    Int
   createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
-  fkTeacherId String   @unique @map("fk_teacher_id") @db.Uuid
 
-  teacher       Teacher        @relation(fields: [fkTeacherId], references: [id])
-  courseModules CourseModule[]
+  modules CoursesModules[]
 
   @@map("courses")
   @@schema("progweb2")
 }
 
-model Module {
+model Modules {
   id          String   @id @default(uuid()) @db.Uuid
   name        String   @unique @db.VarChar(100)
   description String?  @db.VarChar(255)
   createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 
-  courseModules CourseModule[]
+  courses CoursesModules[]
 
   @@map("modules")
   @@schema("progweb2")
 }
 
-model CourseModule {
+model CoursesModules {
+  id       String @id @default(uuid()) @db.Uuid
   courseId String @map("course_id") @db.Uuid
   moduleId String @map("module_id") @db.Uuid
 
-  course Course @relation(fields: [courseId], references: [id])
-  module Module @relation(fields: [moduleId], references: [id])
+  course Courses @relation(fields: [courseId], references: [id])
+  module Modules @relation(fields: [moduleId], references: [id])
 
-  @@id([courseId, moduleId])
-  @@map("couses_modules")
-  @@schema("progweb2")
-}
-
-model Teacher {
-  id        String   @id @default(uuid()) @db.Uuid
-  name      String   @unique @db.VarChar(100)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
-  course    Course?
-
-  @@map("teachers")
+  @@map("courses_modules")
   @@schema("progweb2")
 }
