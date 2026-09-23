@@ -18,6 +18,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - progweb2_network
   app:
     build:
       context: .
@@ -31,6 +33,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - progweb2_network
+
+networks:
+  progweb2_network:
+    driver: bridge
 
 volumes:
   progweb2_data:
